@@ -1,104 +1,208 @@
-/* CSS Variables for Theme Management */
+/* Ocean Professional Theme */
 :root {
-  /* Light theme colors */
-  --bg-primary: #ffffff;
-  --bg-secondary: #f8f9fa;
-  --text-primary: #282c34;
-  --text-secondary: #61dafb;
-  --border-color: #e9ecef;
-  --button-bg: #007bff;
-  --button-text: #ffffff;
+  --primary: #2563EB;
+  --secondary: #F59E0B;
+  --success: #F59E0B;
+  --error: #EF4444;
+  --background: #f9fafb;
+  --surface: #ffffff;
+  --text: #111827;
+  --muted: #6B7280;
+  --ring: rgba(37, 99, 235, 0.35);
 }
 
-[data-theme="dark"] {
-  /* Dark theme colors */
-  --bg-primary: #1a1a1a;
-  --bg-secondary: #282c34;
-  --text-primary: #ffffff;
-  --text-secondary: #61dafb;
-  --border-color: #404040;
-  --button-bg: #0056b3;
-  --button-text: #ffffff;
-}
-
-.App {
-  text-align: center;
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
+/* App Container */
+.ocean-app {
   min-height: 100vh;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  background: linear-gradient(180deg, rgba(59,130,246,0.08), rgba(243,244,246,0.6));
+  position: relative;
+  color: var(--text);
 }
 
-.App-logo {
-  height: 40vmin;
+.app-gradient {
+  position: absolute;
+  inset: -10% -10% auto -10%;
+  height: 45vh;
+  background: radial-gradient(1200px 400px at 50% -100px, rgba(59,130,246,0.16), transparent 60%),
+              radial-gradient(1000px 400px at 40% -120px, rgba(245,158,11,0.08), transparent 55%);
+  filter: blur(20px);
   pointer-events: none;
+  z-index: 0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: var(--bg-secondary);
-  min-height: 100vh;
+.content {
+  position: relative;
+  z-index: 1;
+  padding: 48px 16px 160px;
   display: flex;
   flex-direction: column;
+  gap: 24px;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: var(--text-primary);
-  transition: background-color 0.3s ease;
-  position: relative;
 }
 
-.App-link {
-  color: var(--text-secondary);
-  transition: color 0.3s ease;
+/* Preview Pane */
+.preview-pane {
+  width: min(1100px, 92vw);
 }
 
-.theme-toggle {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background-color: var(--button-bg);
-  color: var(--button-text);
-  border: none;
-  border-radius: 8px;
-  padding: 10px 20px;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.preview-card {
+  background: var(--surface);
+  border: 1px solid rgba(17,24,39,0.06);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.05);
+  transition: transform 300ms ease, box-shadow 300ms ease;
 }
 
-.theme-toggle:hover {
+.preview-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  opacity: 0.9;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.10), 0 3px 10px rgba(0,0,0,0.06);
 }
 
-.theme-toggle:active {
+.preview-media {
+  width: 100%;
+  aspect-ratio: 16/9;
+  background-size: cover;
+  background-position: center center;
+  transition: background-image 300ms ease-in-out;
+}
+
+.preview-meta {
+  padding: 16px 18px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.preview-title {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  color: var(--text);
+  margin: 0;
+}
+
+/* Controls */
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: saturate(140%) blur(10px);
+  border: 1px solid rgba(17,24,39,0.08);
+  border-radius: 14px;
+  padding: 8px 10px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+
+.btn {
+  appearance: none;
+  border: 1px solid rgba(17,24,39,0.12);
+  background: linear-gradient(180deg, #ffffff, #f9fafb);
+  color: var(--text);
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  cursor: pointer;
+  transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+  border-color: var(--ring);
+}
+
+.btn:active {
   transform: translateY(0);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.btn-primary {
+  background: linear-gradient(180deg, rgba(37,99,235,0.95), rgba(37,99,235,0.85));
+  color: white;
+  border-color: rgba(37,99,235,0.85);
+  box-shadow: 0 10px 24px rgba(37,99,235,0.25);
+}
+
+.btn-primary:hover {
+  box-shadow: 0 12px 28px rgba(37,99,235,0.3);
+}
+
+.counter {
+  font-size: 14px;
+  color: var(--muted);
+  min-width: 72px;
+  text-align: center;
+}
+
+/* Dock */
+.dock-container {
+  position: fixed;
+  bottom: 18px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  padding: 0 12px;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.dock {
+  pointer-events: auto;
+  background: rgba(255,255,255,0.82);
+  backdrop-filter: saturate(160%) blur(16px);
+  border: 1px solid rgba(17,24,39,0.08);
+  border-radius: 18px;
+  padding: 10px 12px;
+  display: flex;
+  gap: 10px;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.18), 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.dock-item-wrapper {
+  display: flex;
+  align-items: end;
+}
+
+.dock-item {
+  appearance: none;
+  border: 2px solid transparent;
+  outline: none;
+  cursor: pointer;
+  transition: 
+    transform 140ms ease,
+    width 140ms ease,
+    height 140ms ease,
+    box-shadow 160ms ease,
+    border-color 160ms ease;
+  background-color: var(--surface);
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .content {
+    padding-bottom: 140px;
   }
-  to {
-    transform: rotate(360deg);
+  .preview-title {
+    font-size: 16px;
+  }
+  .counter {
+    min-width: 60px;
+  }
+  .dock {
+    gap: 8px;
+    padding: 8px 10px;
   }
 }
 
-/* Responsive design for mobile */
-@media (max-width: 768px) {
-  .theme-toggle {
-    top: 10px;
-    right: 10px;
-    padding: 8px 16px;
-    font-size: 12px;
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .preview-card,
+  .btn,
+  .dock-item {
+    transition: none !important;
   }
 }
